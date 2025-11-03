@@ -1,8 +1,10 @@
-﻿namespace Catalog_API.Exceptions
+﻿using BuildingBolcks.Exceptions;
+
+namespace Catalog_API.Exceptions
 {
-    public class ProductNotFoundException : Exception
+    public class ProductNotFoundException : NotFoundException
     {
-        public ProductNotFoundException(): base("Prodotto non trovato!")
+        public ProductNotFoundException(Guid Id): base("Prodotto", Id)
         {
 
         }
