@@ -2,7 +2,7 @@
 using System.Data;
 
 public record DeleteBasketCommand(string UserName) : ICommand<DeleteBasketResult>;
-public record DeleteBasketResult(bool IsSucces);
+public record DeleteBasketResult(bool IsSuccess);
 
 public class DeleteCommandValidator : AbstractValidator<DeleteBasketCommand>
 {
