@@ -18,5 +18,9 @@ namespace Discount.Grpc.Services
                 Message = "Hello " + request.Name
             });
         }
+
+
+
+
     }
 }
