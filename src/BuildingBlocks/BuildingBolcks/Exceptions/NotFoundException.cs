@@ -7,7 +7,7 @@ public class NotFoundException : Exception
 
     }
 
-    public NotFoundException(string name, object key) : base($"Entità \"{name}\" ({key}) non è stata trovata")
+    public NotFoundException(string name, object key) : base($"Entità \"{name}\" ({key}) non è stato trovata")
     {
 
     }

@@ -8,6 +8,7 @@ global using Mapster;
 global using BuildingBolcks.Exceptions;
 global using Basket_API.Exceptions;
 global using Marten;
+global using Basket_API.Data;
 
 
 

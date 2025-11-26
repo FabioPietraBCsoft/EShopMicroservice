@@ -12,20 +12,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Services/Basket/Basket API/Basket API.csproj", "Services/Basket/Basket API/"]
-COPY ["BuildingBlocks/BuildingBolcks/BuildingBolcks.csproj", "BuildingBlocks/BuildingBolcks/"]
-RUN dotnet restore "./Services/Basket/Basket API/Basket API.csproj"
+COPY ["Services/Discount/Discount.Grpc/Discount.Grpc.csproj", "Services/Discount/Discount.Grpc/"]
+RUN dotnet restore "./Services/Discount/Discount.Grpc/Discount.Grpc.csproj"
 COPY . .
-WORKDIR "/src/Services/Basket/Basket API"
-RUN dotnet build "./Basket API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Services/Discount/Discount.Grpc"
+RUN dotnet build "./Discount.Grpc.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Questa fase viene usata per pubblicare il progetto di servizio da copiare nella fase finale
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Basket API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Discount.Grpc.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Questa fase viene usata nell'ambiente di produzione o durante l'esecuzione da Visual Studio in modalità normale (impostazione predefinita quando non si usa la configurazione di debug)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Basket API.dll"]
+ENTRYPOINT ["dotnet", "Discount.Grpc.dll"]
